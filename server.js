@@ -131,5 +131,5 @@ async function initDb(){
   if(!ar.length){const hash=await bcrypt.hash(adminPass,12);await pool.execute("INSERT INTO usuarios(numero,nombre,usuario,password_hash,rol) VALUES(NULL,?,?,?,'admin')",['Administrador',adminUser,hash]); }
 }
 
-app.get('/*',(req,res)=>res.sendFile(path.join(__dirname,'index.html')));
+app.get('*',(req,res)=>res.sendFile(path.join(__dirname,'index.html')));
 initDb().then(()=>app.listen(PORT,()=>console.log(`Servidor en http://localhost:${PORT}`))).catch(e=>{console.error('No se pudo inicializar la BD:',e);process.exit(1);});
